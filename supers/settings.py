@@ -35,6 +35,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'supers',
+    'supers_type',
+
 ]
 
 MIDDLEWARE = [
@@ -113,6 +117,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 try:
-    from heroes_villian_project.local_settings import *
+    from supers.local_settings import *
 except ImportError:
     pass
