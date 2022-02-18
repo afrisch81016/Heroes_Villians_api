@@ -22,30 +22,24 @@ def supers_list(request):
         return Response (serializer.data, status = status.HTTP_201_CREATED)
 
 
-#   elif request.method == 'POST':
-#         serializer = Heroesserializer(data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response (serializer.data,status = status.HTTP_201_CREATED)
+@api_view(['GET','PUT','DELETE'])
+def superheroes_detail(request,pk):
+    supers_details = get_object_or_404(SuperHero,pk=pk)
 
-# @api_view(['GET','PUT','DELETE'])
-# def superheroes_detail(request,pk):
-#     supers_details = get_object_or_404(SuperHero,pk=pk)
+    if request.method == 'GET':
+        serializer = SuperHeroSerializer(supers_details)
+        return Response(serializer.data)
 
-#     if request.method == 'GET':
-#         serializer = Heroesserializer(supers_details)
-#         return Response(serializer.data)
-
-#     elif request.method == 'PUT':
-#         serializer = Heroesserializer(supers_details,data=request.data)
-#         serializer.is_valid(raise_exception=True)
-#         serializer.save()
-#         return Response(serializer.data)
+    elif request.method == 'PUT':
+        serializer = SuperHeroSerializer(supers_details,data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
         
-#     elif request.method == 'DELETE':
-#         supers_details.delete()
+    elif request.method == 'DELETE':
+        supers_details.delete()
 
-#         return Response (status = status.HTTP_204_NO_CONTENT)
+        return Response (status = status.HTTP_204_NO_CONTENT)
 
 
 
